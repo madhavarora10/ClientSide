@@ -13,6 +13,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import { ToastContainer, toast } from 'react-toastify';
+
+
+import { useNavigate } from 'react-router-dom';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -29,6 +33,7 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function UserLoginForm() {
+    const navigate = useNavigate()
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -36,6 +41,13 @@ export default function UserLoginForm() {
       username: data.get('username'),
       password: data.get('password'),
     });
+    if(data.get('username') === "rohit")
+    {
+        navigate('/UserApp')
+    }
+    else
+        toast("Wrong Credentials");
+     
   };
 
   return (
@@ -121,6 +133,7 @@ export default function UserLoginForm() {
           </Box>
         </Grid>
       </Grid>
+      <ToastContainer />
     </ThemeProvider>
   );
 }
